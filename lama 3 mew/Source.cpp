@@ -5,7 +5,6 @@
 using namespace std;
 
 class book{ // БАЗОВЫЙ класс book
-protected:
 	char name[40];
 	char author[40];
 public:
@@ -20,7 +19,6 @@ public:
 };
 
 class section : public book{ // ПРОИЗВОДНЫЙ класс
-protected:
 	char sect[40];
 public:
 	section(char*, char*, char*);
@@ -97,6 +95,9 @@ section::section(char* s1, char* s2, char* s3) : book(s1, s2){
 }
 
 void section::see(){
+	char* name=getName();
+	char* author = getAuthor();
+	char* sect = getSect();
 	cout << "Name of the book: " << name << endl;
 	cout << "Author of the book: " << author << endl;
 	cout << "Section: " << sect << endl;
@@ -107,6 +108,10 @@ library::library(char* s1, char* s2, char* s3, char* s4) :section(s1, s2, s3) {
 }
 
 void library::see() {
+	char* name = getName();
+	char* author = getAuthor();
+	char* sect = getSect();
+	char* libr = getLibr();
 	cout << "Name of the book: " << name << endl;
 	cout << "Author of the book: " << author<< endl;
 	cout << "Section: " << sect << endl;
