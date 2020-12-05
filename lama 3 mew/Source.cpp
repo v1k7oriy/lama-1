@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string.h>
 #define N 50
 
@@ -13,7 +13,10 @@ public:
 	book() {};
 	~book() {};
 	void see();
-	//void setName(char* s1); void setAuthor(char* s2);
+	void setName(char*s1); 
+	void setAuthor(char*s2);
+	char* getName();
+	char* getAuthor();
 };
 
 class section : public book{ // ПРОИЗВОДНЫЙ класс
@@ -24,6 +27,8 @@ public:
 	section() {};
 	~section() {};
 	void see();
+	void setSect(char*s3);
+	char* getSect();
 };
 
 class library :public section {
@@ -33,11 +38,53 @@ public:
 	library() {};
 	~library() {};
 	void see();
+	void setLibr(char*s3);
+	char* getLibr();
 };
 
 book::book(char* s1, char* s2){
 	strcpy_s(name, s1);
 	strcpy_s(author, s2);
+}
+
+void book::setName(char*s1) {
+	cout << "Input the name of the book: ";
+	cin >> s1;
+	strcpy_s(name, s1);
+}
+
+void book::setAuthor(char*s2) {
+	cout << "Input the author of the book: ";
+	cin >> s2;
+	strcpy_s(author, s2);
+}
+
+char* book::getName() {
+	return name;
+}
+
+char* book::getAuthor() {
+	return author;
+}
+
+void section::setSect(char*s3) {
+	cout << "Input section: ";
+	cin >> s3;
+	strcpy_s(sect, s3);
+}
+
+char* section::getSect() {
+	return sect;
+}
+
+void library::setLibr(char*s4) {
+	cout << "Input library: ";
+	cin >> s4;
+	strcpy_s(libr, s4);
+}
+
+char* library::getLibr() {
+	return libr;
 }
 
 void book::see(){
@@ -61,7 +108,7 @@ library::library(char* s1, char* s2, char* s3, char* s4) :section(s1, s2, s3) {
 
 void library::see() {
 	cout << "Name of the book: " << name << endl;
-	cout << "Author of the book: " << author << endl;
+	cout << "Author of the book: " << author<< endl;
 	cout << "Section: " << sect << endl;
 	cout << "Library: " << libr << endl << endl;
 }
@@ -80,17 +127,11 @@ int main(){
 		cout << "0. Exit" << endl;
 		cin >> choice;
 		if (choice == 1) {
-			cout << "Input the name of the book: ";
-			cin >> name;
-			cout << "Input the author of the book: ";
-			cin >> author;
-			cout << "Input the section: ";
-			cin >> sect;
-			cout << "Input the library: ";
-			cin >> libr;
+			s[number_of_book].setName(name);
+			s[number_of_book].setAuthor(author);
+			s[number_of_book].setLibr(libr);
+			s[number_of_book].setSect(sect);
 			cout << endl;
-			library s1(name, author, sect, libr); //создание объекта класса section 
-			s[number_of_book] = s1;
 			number_of_book++;
 		}
 		else if (choice == 2) {
@@ -113,7 +154,7 @@ int main(){
 		}
 		if (choice == 0)
 			break;
-		else if (choice < 0 || choice > 3) //обработка ввода не правельных значений
+		else if (choice < 0 || choice > 3) //обработка ввода не правuльных значений
 			cout << "Error! Incorrect input!" << endl;
 	} while (choice != 0);
 	return 0;
